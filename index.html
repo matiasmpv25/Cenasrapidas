@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cenas Rápidas y Saludables</title>
+    
+    <!-- Librería de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fuentes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+    
+    <!-- Iconos de Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Estilos personalizados */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        .recipe-card-title {
+             font-family: 'Lora', serif;
+             font-weight: 500;
+             font-style: italic;
+        }
+        /* Ocultar la barra de scroll del modal */
+        .modal-body::-webkit-scrollbar {
+            display: none;
+        }
+        .modal-body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Contenedor Principal -->
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <!-- Encabezado -->
+        <header class="bg-gradient-to-r from-emerald-500 to-green-500 text-white p-8 rounded-2xl shadow-lg mb-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">Cenas Rápidas y Saludables</h1>
+            <p class="text-lg md:text-xl opacity-90">Recetas deliciosas en menos de 30 minutos, perfectas para tu estilo de vida.</p>
+        </header>
+
+        <!-- Barra de Navegación -->
+        <nav class="bg-white rounded-2xl shadow-md mb-8 sticky top-4 z-10">
+            <ul class="flex justify-center items-center p-2 space-x-2 md:space-x-6">
+                <li><a href="#inicio" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300">Inicio</a></li>
+                <li><a href="#recetas" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300">Recetas</a></li>
+                <li><a href="#consejos" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300">Consejos</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main>
+            <!-- SECCIÓN DE INICIO -->
+            <section id="inicio" class="text-center mb-16 p-8 bg-white rounded-2xl shadow-md">
+                <h2 class="text-3xl font-bold text-emerald-600 mb-4">¡Bienvenida/o a tu salvación en la cocina!</h2>
+                <p class="max-w-3xl mx-auto text-gray-600 mb-6">
+                    ¿Cansada/o de llegar a casa sin ideas y terminar pidiendo delivery otra vez? ¡Se acabó! Aquí encontrarás un universo de recetas increíblemente fáciles, rápidas y, lo más importante, ¡deliciosas! Olvídate del estrés y redescubre el placer de cocinar y comer bien, incluso en los días más ocupados.
+                </p>
+                <a href="#recetas" class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-300 hover:scale-105">¡Quiero cocinar ya!</a>
+            </section>
+
+            <!-- SECCIÓN DE RECETAS -->
+            <section id="recetas" class="mb-16">
+                <h2 class="text-3xl font-bold text-center text-gray-700 mb-8">Nuestras Recetas Estrella</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Tarjeta de Receta 1 -->
+                    <article class="recipe-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                        <img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Plato de pasta cremosa con tomates y albahaca" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-2xl recipe-card-title text-gray-800 mb-2">Pasta Cremosa con Tomates Cherry</h3>
+                            <p class="text-gray-600 flex-grow mb-4">Una cena deliciosa y rápida con ingredientes frescos y un toque italiano que te transportará.</p>
+                            <button class="recipe-button mt-auto self-start bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-lg transition-colors duration-300">Ver Receta</button>
+                        </div>
+                    </article>
+
+                    <!-- Tarjeta de Receta 2 -->
+                    <article class="recipe-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                        <img src="https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Bol con ensalada de quinoa, aguacate y garbanzos" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-2xl recipe-card-title text-gray-800 mb-2">Ensalada de Quinoa y Aguacate</h3>
+                            <p class="text-gray-600 flex-grow mb-4">Una opción nutritiva y llena de sabor, ideal para una cena ligera pero muy completa y saciante.</p>
+                            <button class="recipe-button mt-auto self-start bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-lg transition-colors duration-300">Ver Receta</button>
+                        </div>
+                    </article>
+
+                    <!-- Tarjeta de Receta 3 -->
+                    <article class="recipe-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                        <img src="https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tostada de pan integral con huevo revuelto y salmón ahumado" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-2xl recipe-card-title text-gray-800 mb-2">Tostadas con Huevo y Salmón</h3>
+                            <p class="text-gray-600 flex-grow mb-4">Una cena elegante y facilísima de preparar, rica en proteínas y grasas saludables Omega-3.</p>
+                            <button class="recipe-button mt-auto self-start bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-lg transition-colors duration-300">Ver Receta</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN DE CONSEJOS -->
+            <section id="consejos" class="mb-16 p-8 bg-white rounded-2xl shadow-md">
+                <h2 class="text-3xl font-bold text-center text-gray-700 mb-8">Consejos para Ahorrar Tiempo y Comer Mejor</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flex items-start space-x-4">
+                        <i class="ph-light ph-leaf text-4xl text-emerald-500 bg-emerald-100 p-2 rounded-full"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Mise en place es tu amigo</h4>
+                            <p class="text-gray-600">Antes de empezar, pica todas tus verduras y ten listos los ingredientes. Este truco de chef profesional te ahorrará un estrés increíble.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i class="ph-light ph-timer text-4xl text-emerald-500 bg-emerald-100 p-2 rounded-full"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Cocina un poco de más</h4>
+                            <p class="text-gray-600">Si haces arroz o quinoa, cocina el doble. Así ya tienes una base lista para tu almuerzo o cena del día siguiente. ¡Eficiencia pura!</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i class="ph-light ph-heart-straight text-4xl text-emerald-500 bg-emerald-100 p-2 rounded-full"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Salsas que salvan vidas</h4>
+                            <p class="text-gray-600">Prepara un par de salsas o aderezos sencillos durante el fin de semana. Un buen pesto o una vinagreta transforman cualquier plato aburrido.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i class="ph-light ph-sparkle text-4xl text-emerald-500 bg-emerald-100 p-2 rounded-full"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">No le temas a las especias</h4>
+                            <p class="text-gray-600">Un poco de pimentón ahumado, comino o hierbas secas pueden llevar tu plato de "meh" a "¡wow!" en segundos. ¡Experimenta sin miedo!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pie de Página -->
+        <footer class="text-center mt-12 py-6 border-t border-gray-200">
+            <p class="text-gray-500">&copy; 2025 Cenas Rápidas y Saludables | Creado con ❤️ para ti.</p>
+        </footer>
+    </div>
+
+    <!-- MODAL PARA RECETAS (inicialmente oculto) -->
+    <div id="recipe-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 id="modal-title" class="text-2xl recipe-card-title"></h3>
+                <button id="close-modal" class="text-gray-500 hover:text-red-600">
+                    <i class="ph-bold ph-x text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-6 modal-body overflow-y-auto">
+                <img id="modal-image" src="" alt="Imagen de la receta" class="w-full h-64 object-cover rounded-lg mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-xl font-bold mb-2 text-emerald-700">Ingredientes</h4>
+                        <ul id="modal-ingredients" class="list-disc list-inside text-gray-600 space-y-1"></ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-2 text-emerald-700">Preparación</h4>
+                        <ol id="modal-steps" class="list-decimal list-inside text-gray-600 space-y-2"></ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- JAVASCRIPT PARA INTERACTIVIDAD ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- DATOS DE LAS RECETAS ---
+            const recipesData = [
+                {
+                    title: "Pasta Cremosa con Tomates Cherry",
+                    image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    ingredients: [
+                        "200g de pasta (penne o fusilli)",
+                        "1 taza de tomates cherry",
+                        "2 dientes de ajo",
+                        "1/2 taza de crema de leche (nata)",
+                        "Queso parmesano rallado",
+                        "Albahaca fresca",
+                        "Aceite de oliva, sal y pimienta"
+                    ],
+                    steps: [
+                        "Cocina la pasta según las instrucciones del paquete.",
+                        "Mientras, saltea en aceite de oliva el ajo picado y los tomates cherry cortados por la mitad.",
+                        "Cuando los tomates estén blandos, añade la crema y cocina a fuego bajo por 2 minutos.",
+                        "Escurre la pasta, mézclala con la salsa, añade queso parmesano y albahaca fresca. ¡Listo!"
+                    ]
+                },
+                {
+                    title: "Ensalada de Quinoa y Aguacate",
+                    image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    ingredients: [
+                        "1 taza de quinoa cocida",
+                        "1 aguacate en cubos",
+                        "1/2 taza de garbanzos cocidos",
+                        "1/4 de cebolla morada picada",
+                        "Jugo de 1 limón",
+                        "Cilantro fresco picado",
+                        "Aceite de oliva, sal y pimienta"
+                    ],
+                    steps: [
+                        "En un bol grande, mezcla la quinoa cocida y fría con los garbanzos.",
+                        "Añade el aguacate en cubos y la cebolla morada.",
+                        "Prepara el aderezo mezclando el jugo de limón, un chorrito de aceite de oliva, sal y pimienta.",
+                        "Vierte el aderezo sobre la ensalada, añade el cilantro y mezcla con cuidado. ¡A disfrutar!"
+                    ]
+                },
+                {
+                    title: "Tostadas con Huevo y Salmón",
+                    image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    ingredients: [
+                        "2 rebanadas de pan integral",
+                        "2 huevos",
+                        "50g de salmón ahumado",
+                        "1/4 de aguacate",
+                        "Eneldo o cebollino fresco",
+                        "Un chorrito de leche (opcional)",
+                        "Sal y pimienta"
+                    ],
+                    steps: [
+                        "Tuesta las rebanadas de pan.",
+                        "Bate los huevos con un chorrito de leche, sal y pimienta. Cocínalos en una sartén a fuego medio hasta que estén revueltos y cremosos.",
+                        "Unta el aguacate sobre las tostadas.",
+                        "Coloca el huevo revuelto encima y finaliza con las lonchas de salmón ahumado y eneldo picado."
+                    ]
+                }
+            ];
+
+            // --- LÓGICA DEL MODAL ---
+            const modal = document.getElementById('recipe-modal');
+            const closeModalButton = document.getElementById('close-modal');
+            const recipeButtons = document.querySelectorAll('.recipe-button');
+
+            recipeButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    const recipe = recipesData[index];
+                    
+                    document.getElementById('modal-title').textContent = recipe.title;
+                    document.getElementById('modal-image').src = recipe.image;
+                    
+                    const ingredientsList = document.getElementById('modal-ingredients');
+                    ingredientsList.innerHTML = ''; // Limpiar lista anterior
+                    recipe.ingredients.forEach(ing => {
+                        const li = document.createElement('li');
+                        li.textContent = ing;
+                        ingredientsList.appendChild(li);
+                    });
+
+                    const stepsList = document.getElementById('modal-steps');
+                    stepsList.innerHTML = ''; // Limpiar lista anterior
+                    recipe.steps.forEach(step => {
+                        const li = document.createElement('li');
+                        li.textContent = step;
+                        stepsList.appendChild(li);
+                    });
+
+                    modal.classList.remove('hidden');
+                });
+            });
+
+            function closeModal() {
+                modal.classList.add('hidden');
+            }
+
+            closeModalButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (event) => {
+                // Cierra el modal si se hace clic en el fondo oscuro
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // --- LÓGICA DE NAVEGACIÓN SUAVE Y ACTIVA ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            // Función para actualizar el estado activo del menú
+            function updateActiveLink() {
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('bg-emerald-100', 'text-emerald-700');
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                        link.classList.add('bg-emerald-100', 'text-emerald-700');
+                    }
+                });
+            }
+
+            // Actualizar al cargar y al hacer scroll
+            updateActiveLink();
+            window.addEventListener('scroll', updateActiveLink);
+        });
+    </script>
+
+</body>
+</html>
