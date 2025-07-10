@@ -56,9 +56,10 @@
         <nav class="bg-white rounded-2xl shadow-md mb-8 sticky top-4 z-10">
             <ul class="flex justify-center items-center p-2 space-x-2 md:space-x-6">
                 <li><a href="#inicio" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300" data-translate="nav_home"></a></li>
+                <li><a href="#about" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300" data-translate="nav_about"></a></li>
                 <li><a href="#recetas" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300" data-translate="nav_recipes"></a></li>
                 <li><a href="#consejos" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300" data-translate="nav_tips"></a></li>
-                <li><a href="#" class="text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300" data-translate="nav_contact"></a></li>
+                <li><a href="#contact" class="nav-link text-gray-600 hover:text-emerald-600 font-semibold py-2 px-3 transition-colors duration-300" data-translate="nav_contact"></a></li>
             </ul>
         </nav>
 
@@ -69,6 +70,15 @@
                 <h2 class="text-3xl font-bold text-emerald-600 mb-4" data-translate="welcome_title"></h2>
                 <p class="max-w-3xl mx-auto text-gray-600 mb-6" data-translate="welcome_text"></p>
                 <a href="#recetas" class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-300 hover:scale-105" data-translate="welcome_button"></a>
+            </section>
+            
+            <!-- SECCIÓN QUIÉNES SOMOS -->
+            <section id="about" class="mb-16 p-8 bg-white rounded-2xl shadow-md flex flex-col md:flex-row items-center gap-8">
+                <img src="https://images.pexels.com/photos/7792263/pexels-photo-7792263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Dos jóvenes estudiantes cocinando juntos" class="w-full md:w-1/3 h-64 object-cover rounded-2xl">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold text-gray-700 mb-4" data-translate="about_title"></h2>
+                    <p class="text-gray-600" data-translate="about_text"></p>
+                </div>
             </section>
 
             <!-- SECCIÓN DE RECETAS -->
@@ -99,10 +109,39 @@
                 </form>
                  <p id="newsletter-feedback" class="mt-4 h-6"></p>
             </section>
+            
+            <!-- SECCIÓN CONTACTO -->
+            <section id="contact" class="text-center mb-16 p-8 bg-white rounded-2xl shadow-md">
+                <h2 class="text-3xl font-bold text-gray-700 mb-4" data-translate="contact_title"></h2>
+                <p class="max-w-3xl mx-auto text-gray-600 mb-4" data-translate="contact_text"></p>
+                <a href="mailto:recetasfaciles@gmail.com" class="inline-flex items-center gap-2 text-emerald-600 font-semibold text-lg hover:text-emerald-800 transition-colors">
+                    <i class="ph ph-paper-plane-tilt text-2xl"></i>
+                    recetasfaciles@gmail.com
+                </a>
+            </section>
+
+            <!-- SECCIÓN DE POLÍTICAS (NUEVA) -->
+            <section id="policies" class="mb-16 p-8 bg-white rounded-2xl shadow-md">
+                <div class="space-y-8 text-gray-600 text-sm">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="privacy_policy_title"></h3>
+                        <p data-translate="privacy_policy_text"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="cookie_policy_title"></h3>
+                        <p data-translate="cookie_policy_text"></p>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <!-- Pie de Página -->
         <footer class="text-center mt-12 py-6 border-t border-gray-200">
+            <div class="flex justify-center gap-4 mb-4">
+                 <a href="#about" class="text-gray-500 hover:text-emerald-600" data-translate="nav_about"></a>
+                 <a href="#contact" class="text-gray-500 hover:text-emerald-600" data-translate="nav_contact"></a>
+                 <a href="#policies" class="text-gray-500 hover:text-emerald-600" data-translate="privacy_policy_title"></a>
+            </div>
             <p class="text-gray-500" data-translate="footer_text"></p>
         </footer>
     </div>
@@ -168,17 +207,25 @@
             const content = {
                 es: {
                     header_title: "Cenas Rápidas y Saludables", header_subtitle: "Recetas deliciosas en menos de 30 minutos, perfectas para tu estilo de vida.",
-                    nav_home: "Inicio", nav_recipes: "Recetas", nav_tips: "Consejos", nav_contact: "Contacto",
+                    nav_home: "Inicio", nav_about: "Quiénes Somos", nav_recipes: "Recetas", nav_tips: "Consejos", nav_contact: "Contacto",
                     welcome_title: "¡Bienvenida/o a tu salvación en la cocina!", welcome_text: "Aquí encontrarás un universo de recetas increíblemente fáciles, rápidas y, lo más importante, ¡deliciosas!", welcome_button: "¡Quiero cocinar ya!",
+                    about_title: "Nuestra Historia", about_text: "Somos dos estudiantes apasionados por la buena comida. Sabemos que la vida universitaria puede ser un caos, pero creemos firmemente que comer bien no debería serlo. Creamos esta página para compartir nuestro amor por la cocina y demostrar que se pueden crear platos increíbles, saludables y rápidos sin ser un chef experto. ¡Únete a nuestra aventura culinaria!",
                     recipes_title: "Nuestras Recetas Estrella", tips_title: "Consejos para Ahorrar Tiempo y Comer Mejor",
                     newsletter_title: "¡Únete a nuestra comunidad!", newsletter_text: "Recibe las nuevas recetas y los mejores consejos directamente en tu correo cada semana. ¡Sin spam!", newsletter_button: "Suscribirme", newsletter_placeholder: "Tu correo electrónico",
+                    contact_title: "¿Tienes alguna pregunta?", contact_text: "Nos encantaría saber de ti. Si tienes alguna duda, sugerencia o simplemente quieres saludar, no dudes en escribirnos.",
+                    privacy_policy_title: "Política de Privacidad", privacy_policy_text: "En [Nombre de tu web], valoramos tu privacidad. La única información personal que recopilamos es la dirección de correo electrónico que proporcionas voluntariamente a través de nuestro formulario de suscripción. Usamos este correo exclusivamente para enviarte nuestras nuevas recetas y consejos. No compartimos tu información con terceros. Utilizamos cookies para mejorar la experiencia en nuestro sitio y para mostrar anuncios relevantes a través de Google AdSense. Puedes optar por desactivar las cookies en la configuración de tu navegador.",
+                    cookie_policy_title: "Política de Cookies", cookie_policy_text: "Este sitio web utiliza cookies para mejorar su experiencia. Las cookies son pequeños archivos de texto que se almacenan en su computadora o dispositivo móvil cuando visita un sitio web. Utilizamos cookies de sesión (que expiran cuando cierra su navegador) y cookies persistentes (que permanecen en su dispositivo durante un período determinado). También utilizamos cookies de terceros, como las de Google AdSense, para publicar anuncios basados en sus visitas anteriores a este u otros sitios web. Puede obtener más información sobre cómo Google utiliza los datos cuando utiliza los sitios o aplicaciones de nuestros socios en el sitio de Google. Al utilizar nuestro sitio, usted acepta nuestro uso de cookies.",
                     feedback_success: "¡Gracias por suscribirte!", feedback_error: "Email inválido o error. Inténtalo de nuevo.",
                     footer_text: "© 2025 Cenas Rápidas y Saludables | Creado con ❤️ para ti.",
                     modal_ingredients: "Ingredientes", modal_preparation: "Preparación", recipe_button_text: "Ver Receta",
                     recipes: [
                         { title: "Pasta Cremosa con Tomates Cherry", description: "Una cena deliciosa y rápida con ingredientes frescos y un toque italiano.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200g de pasta", "1 taza de tomates cherry", "2 dientes de ajo", "1/2 taza de crema de leche", "Queso parmesano", "Albahaca fresca", "Aceite de oliva, sal, pimienta"], steps: ["Cocina la pasta.", "Saltea el ajo y los tomates.", "Añade la crema y cocina.", "Mezcla todo con la pasta y sirve."] },
                         { title: "Ensalada de Quinoa y Aguacate", description: "Una opción nutritiva y llena de sabor, ideal para una cena ligera pero completa.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 taza de quinoa cocida", "1 aguacate en cubos", "1/2 taza de garbanzos", "1/4 cebolla morada", "Jugo de 1 limón", "Cilantro fresco", "Aceite de oliva, sal, pimienta"], steps: ["Mezcla la quinoa y garbanzos.", "Añade el aguacate y la cebolla.", "Prepara el aderezo de limón y aceite.", "Mezcla todo y sirve."] },
-                        { title: "Tostadas con Huevo y Salmón", description: "Una cena elegante y fácil, rica en proteínas y grasas saludables Omega-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 rebanadas de pan integral", "2 huevos", "50g de salmón ahumado", "1/4 de aguacate", "Eneldo o cebollino", "Sal y pimienta"], steps: ["Tuesta el pan.", "Prepara los huevos revueltos.", "Unta el aguacate en las tostadas.", "Monta todo: tostada, aguacate, huevo y salmón."] }
+                        { title: "Tostadas con Huevo y Salmón", description: "Una cena elegante y fácil, rica en proteínas y grasas saludables Omega-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 rebanadas de pan integral", "2 huevos", "50g de salmón ahumado", "1/4 de aguacate", "Eneldo o cebollino", "Sal y pimienta"], steps: ["Tuesta el pan.", "Prepara los huevos revueltos.", "Unta el aguacate en las tostadas.", "Monta todo: tostada, aguacate, huevo y salmón."] },
+                        { title: "Pollo al Limón con Espárragos", description: "Un plato principal jugoso y lleno de sabor que se prepara en una sola sartén.", image: "https://images.pexels.com/photos/6107773/pexels-photo-6107773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 pechugas de pollo", "1 manojo de espárragos", "1 limón", "3 dientes de ajo", "Tomillo fresco", "Aceite de oliva, sal, pimienta"], steps: ["Sazona el pollo con sal, pimienta y tomillo.", "Dora el pollo en una sartén con aceite.", "Añade los espárragos, rodajas de limón y ajo.", "Cocina tapado hasta que el pollo esté listo."] },
+                        { title: "Tacos de Lentejas y Champiñones", description: "Una alternativa vegetariana, económica y sorprendentemente deliciosa a los tacos tradicionales.", image: "https://images.pexels.com/photos/5560443/pexels-photo-5560443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 taza de lentejas cocidas", "200g de champiñones", "1 cebolla", "Comino y pimentón", "Tortillas de maíz", "Cilantro, lima y aguacate para servir"], steps: ["Sofríe la cebolla y los champiñones picados.", "Añade las lentejas y las especias. Cocina 5 min.", "Calienta las tortillas.", "Rellena las tortillas con la mezcla y sirve con tus toppings favoritos."] },
+                        { title: "Sopa Rápida de Tomate y Albahaca", description: "Reconfortante, clásica y lista en un abrir y cerrar de ojos. Perfecta para un día frío.", image: "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 lata (400g) de tomates triturados", "1 cebolla", "2 dientes de ajo", "1/2 taza de caldo de verduras", "Albahaca fresca", "Un chorrito de crema (opcional)"], steps: ["Sofríe la cebolla y el ajo.", "Añade los tomates y el caldo. Cocina 10 min.", "Tritura la sopa hasta que esté suave.", "Sirve caliente con albahaca fresca y crema."] },
+                        { title: "Wrap de Hummus y Vegetales", description: "Un almuerzo o cena fría, sin cocción, que puedes preparar en literalmente 5 minutos.", image: "https://images.pexels.com/photos/6940989/pexels-photo-6940989.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 tortillas de trigo grandes", "1/2 taza de hummus", "Hojas de espinaca", "1/2 pimiento rojo en tiras", "1/2 pepino en tiras", "Zanahoria rallada"], steps: ["Unta una capa generosa de hummus sobre cada tortilla.", "Coloca las hojas de espinaca en el centro.", "Añade el resto de los vegetales en fila.", "Enrolla la tortilla apretando bien y ¡listo!"] }
                     ],
                     tips: [
                         { icon: "ph-leaf", title: "Mise en place es tu amigo", text: "Antes de empezar, pica todas tus verduras y ten listos los ingredientes. Te ahorrará un estrés increíble." },
@@ -189,17 +236,25 @@
                 },
                 en: {
                     header_title: "Quick & Healthy Dinners", header_subtitle: "Delicious recipes in under 30 minutes, perfect for your lifestyle.",
-                    nav_home: "Home", nav_recipes: "Recipes", nav_tips: "Tips", nav_contact: "Contact",
+                    nav_home: "Home", nav_about: "About Us", nav_recipes: "Recipes", nav_tips: "Tips", nav_contact: "Contact",
                     welcome_title: "Welcome to your kitchen salvation!", welcome_text: "Here you'll find a universe of incredibly easy, fast, and most importantly, delicious recipes!", welcome_button: "Let's cook now!",
+                    about_title: "Our Story", about_text: "We are two students passionate about good food. We know that university life can be chaotic, but we firmly believe that eating well shouldn't be. We created this page to share our love for cooking and to show that you can create incredible, healthy, and fast dishes without being an expert chef. Join our culinary adventure!",
                     recipes_title: "Our Star Recipes", tips_title: "Tips to Save Time and Eat Better",
                     newsletter_title: "Join our community!", newsletter_text: "Receive new recipes and the best tips directly in your email every week. No spam!", newsletter_button: "Subscribe", newsletter_placeholder: "Your email address",
+                    contact_title: "Have a question?", contact_text: "We'd love to hear from you. If you have any questions, suggestions, or just want to say hello, don't hesitate to write to us.",
+                    privacy_policy_title: "Privacy Policy", privacy_policy_text: "At [Your Website Name], we value your privacy. The only personal information we collect is the email address you voluntarily provide through our subscription form. We use this email exclusively to send you our new recipes and tips. We do not share your information with third parties. We use cookies to improve the experience on our site and to display relevant ads through Google AdSense. You can choose to disable cookies in your browser settings.",
+                    cookie_policy_title: "Cookie Policy", cookie_policy_text: "This website uses cookies to enhance your experience. Cookies are small text files that are stored on your computer or mobile device when you visit a website. We use session cookies (which expire when you close your browser) and persistent cookies (which remain on your device for a set period). We also use third-party cookies, such as those from Google AdSense, to serve ads based on your prior visits to this or other websites. You can learn more about how Google uses data when you use our partners' sites or apps on Google's site. By using our site, you agree to our use of cookies.",
                     feedback_success: "Thanks for subscribing!", feedback_error: "Invalid email or error. Please try again.",
                     footer_text: "© 2025 Quick & Healthy Dinners | Made with ❤️ for you.",
                     modal_ingredients: "Ingredients", modal_preparation: "Preparation", recipe_button_text: "View Recipe",
                     recipes: [
                         { title: "Creamy Cherry Tomato Pasta", description: "A delicious and quick dinner with fresh ingredients and an Italian touch.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200g of pasta", "1 cup cherry tomatoes", "2 garlic cloves", "1/2 cup heavy cream", "Parmesan cheese", "Fresh basil", "Olive oil, salt, pepper"], steps: ["Cook the pasta.", "Sauté garlic and tomatoes.", "Add cream and cook.", "Mix everything with the pasta and serve."] },
                         { title: "Quinoa and Avocado Salad", description: "A nutritious and flavorful option, ideal for a light but very complete dinner.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 cup cooked quinoa", "1 avocado, diced", "1/2 cup chickpeas", "1/4 red onion", "Juice of 1 lemon", "Fresh cilantro", "Olive oil, salt, pepper"], steps: ["Mix quinoa and chickpeas.", "Add avocado and onion.", "Prepare lemon and oil dressing.", "Mix everything and serve."] },
-                        { title: "Toast with Egg and Salmon", description: "An elegant and easy dinner, rich in protein and healthy Omega-3 fats.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 slices of whole wheat bread", "2 eggs", "50g smoked salmon", "1/4 avocado", "Dill or chives", "Salt and pepper"], steps: ["Toast the bread.", "Prepare scrambled eggs.", "Spread avocado on the toast.", "Assemble everything: toast, avocado, egg, and salmon."] }
+                        { title: "Toast with Egg and Salmon", description: "An elegant and easy dinner, rich in protein and healthy Omega-3 fats.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 slices of whole wheat bread", "2 eggs", "50g smoked salmon", "1/4 avocado", "Dill or chives", "Salt and pepper"], steps: ["Toast the bread.", "Prepare scrambled eggs.", "Spread avocado on the toast.", "Assemble everything: toast, avocado, egg, and salmon."] },
+                        { title: "Lemon Chicken with Asparagus", description: "A juicy and flavorful main course that is prepared in a single pan.", image: "https://images.pexels.com/photos/6107773/pexels-photo-6107773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 chicken breasts", "1 bunch of asparagus", "1 lemon", "3 garlic cloves", "Fresh thyme", "Olive oil, salt, pepper"], steps: ["Season the chicken with salt, pepper, and thyme.", "Brown the chicken in a pan with oil.", "Add the asparagus, lemon slices, and garlic.", "Cook covered until the chicken is done."] },
+                        { title: "Lentil and Mushroom Tacos", description: "A vegetarian, budget-friendly, and surprisingly delicious alternative to traditional tacos.", image: "https://images.pexels.com/photos/5560443/pexels-photo-5560443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 cup cooked lentils", "200g mushrooms", "1 onion", "Cumin and paprika", "Corn tortillas", "Cilantro, lime, and avocado to serve"], steps: ["Sauté the chopped onion and mushrooms.", "Add the lentils and spices. Cook for 5 min.", "Heat the tortillas.", "Fill the tortillas with the mixture and serve with your favorite toppings."] },
+                        { title: "Quick Tomato and Basil Soup", description: "Comforting, classic, and ready in the blink of an eye. Perfect for a cold day.", image: "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 can (400g) crushed tomatoes", "1 onion", "2 garlic cloves", "1/2 cup vegetable broth", "Fresh basil", "A splash of cream (optional)"], steps: ["Sauté the onion and garlic.", "Add the tomatoes and broth. Cook for 10 min.", "Blend the soup until smooth.", "Serve hot with fresh basil and cream."] },
+                        { title: "Hummus and Veggie Wrap", description: "A cold, no-cook lunch or dinner that you can prepare in literally 5 minutes.", image: "https://images.pexels.com/photos/6940989/pexels-photo-6940989.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 large flour tortillas", "1/2 cup hummus", "Spinach leaves", "1/2 red pepper, sliced", "1/2 cucumber, sliced", "Grated carrot"], steps: ["Spread a generous layer of hummus on each tortilla.", "Place the spinach leaves in the center.", "Add the rest of the vegetables in a row.", "Roll up the tortilla tightly and you're done!"] }
                     ],
                     tips: [
                         { icon: "ph-leaf", title: "Mise en place is your friend", text: "Before you start, chop all your vegetables and have your ingredients ready. It will save you incredible stress." },
@@ -210,17 +265,25 @@
                 },
                 ru: {
                     header_title: "Быстрые и здоровые ужины", header_subtitle: "Вкусные рецепты менее чем за 30 минут, идеально для вашего образа жизни.",
-                    nav_home: "Главная", nav_recipes: "Рецепты", nav_tips: "Советы", nav_contact: "Контакт",
+                    nav_home: "Главная", nav_about: "О нас", nav_recipes: "Рецепты", nav_tips: "Советы", nav_contact: "Контакт",
                     welcome_title: "Добро пожаловать в ваше кухонное спасение!", welcome_text: "Здесь вы найдете вселенную невероятно простых, быстрых и, самое главное, вкусных рецептов!", welcome_button: "Начнем готовить!",
+                    about_title: "Наша история", about_text: "Мы — двое студентов, увлеченных хорошей едой. Мы знаем, что студенческая жизнь может быть хаотичной, но твердо верим, что хорошее питание не должно быть таким. Мы создали эту страницу, чтобы поделиться нашей любовью к кулинарии и показать, что можно создавать невероятные, здоровые и быстрые блюда, не будучи экспертом-поваром. Присоединяйтесь к нашему кулинарному приключению!",
                     recipes_title: "Наши звездные рецепты", tips_title: "Советы, как сэкономить время и питаться лучше",
                     newsletter_title: "Присоединяйтесь к нашему сообществу!", newsletter_text: "Получайте новые рецепты и лучшие советы прямо на вашу почту каждую неделю. Без спама!", newsletter_button: "Подписаться", newsletter_placeholder: "Ваш e-mail",
+                    contact_title: "Есть вопрос?", contact_text: "Мы будем рады услышать от вас. Если у вас есть какие-либо вопросы, предложения или вы просто хотите поздороваться, не стесняйтесь писать нам.",
+                    privacy_policy_title: "Политика конфиденциальности", privacy_policy_text: "На [Название вашего сайта] мы ценим вашу конфиденциальность. Единственная личная информация, которую мы собираем, — это адрес электронной почты, который вы добровольно предоставляете через нашу форму подписки. Мы используем этот адрес исключительно для отправки вам наших новых рецептов и советов. Мы не передаем вашу информацию третьим лицам. Мы используем файлы cookie для улучшения работы нашего сайта и для показа релевантной рекламы через Google AdSense. Вы можете отключить файлы cookie в настройках вашего браузера.",
+                    cookie_policy_title: "Политика в отношении файлов cookie", cookie_policy_text: "Этот веб-сайт использует файлы cookie для улучшения вашего опыта. Файлы cookie — это небольшие текстовые файлы, которые хранятся на вашем компьютере или мобильном устройстве, когда вы посещаете веб-сайт. Мы используем сеансовые файлы cookie (которые истекают, когда вы закрываете браузер) и постоянные файлы cookie (которые остаются на вашем устройстве в течение определенного периода). Мы также используем сторонние файлы cookie, например, от Google AdSense, для показа рекламы на основе ваших предыдущих посещений этого или других веб-сайтов. Вы можете узнать больше о том, как Google использует данные, когда вы используете сайты или приложения наших партнеров, на сайте Google. Используя наш сайт, вы соглашаетесь на использование нами файлов cookie.",
                     feedback_success: "Спасибо за подписку!", feedback_error: "Неверный email или ошибка. Попробуйте снова.",
                     footer_text: "© 2025 Быстрые и здоровые ужины | Сделано с ❤️ для вас.",
                     modal_ingredients: "Ингредиенты", modal_preparation: "Приготовление", recipe_button_text: "Смотреть рецепт",
                     recipes: [
                         { title: "Сливочная паста с томатами черри", description: "Вкусный и быстрый ужин со свежими ингредиентами и итальянской ноткой.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200г пасты", "1 стакан томатов черри", "2 зубчика чеснока", "1/2 стакана сливок", "Сыр пармезан", "Свежий базилик", "Оливковое масло, соль, перец"], steps: ["Сварите пасту.", "Обжарьте чеснок и помидоры.", "Добавьте сливки и готовьте.", "Смешайте все с пастой и подавайте."] },
                         { title: "Салат с киноа и авокадо", description: "Питательный и ароматный вариант, идеально для легкого, но очень сытного ужина.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 стакан вареной киноа", "1 авокадо, кубиками", "1/2 стакана нута", "1/4 красного лука", "Сок 1 лимона", "Свежая кинза", "Оливковое масло, соль, перец"], steps: ["Смешайте киноа и нут.", "Добавьте авокадо и лук.", "Приготовьте заправку из лимона и масла.", "Все смешайте и подавайте."] },
-                        { title: "Тосты с яйцом и лососем", description: "Элегантный и простой ужин, богатый белком и полезными жирами Омега-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 ломтика хлеба", "2 яйца", "50г копченого лосося", "1/4 авокадо", "Укроп или зеленый лук", "Соль и перец"], steps: ["Поджарьте хлеб.", "Приготовьте яичницу.", "Намажьте авокадо на тосты.", "Соберите все: тост, авокадо, яйцо и лосось."] }
+                        { title: "Тосты с яйцом и лососем", description: "Элегантный и простой ужин, богатый белком и полезными жирами Омега-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 ломтика хлеба", "2 яйца", "50г копченого лосося", "1/4 авокадо", "Укроп или зеленый лук", "Соль и перец"], steps: ["Поджарьте хлеб.", "Приготовьте яичницу.", "Намажьте авокадо на тосты.", "Соберите все: тост, авокадо, яйцо и лосось."] },
+                        { title: "Курица с лимоном и спаржей", description: "Сочное и ароматное основное блюдо, которое готовится на одной сковороде.", image: "https://images.pexels.com/photos/6107773/pexels-photo-6107773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 куриные грудки", "1 пучок спаржи", "1 лимон", "3 зубчика чеснока", "Свежий тимьян", "Оливковое масло, соль, перец"], steps: ["Приправьте курицу солью, перцем и тимьяном.", "Обжарьте курицу на сковороде с маслом.", "Добавьте спаржу, ломтики лимона и чеснок.", "Готовьте под крышкой до готовности курицы."] },
+                        { title: "Тако с чечевицей и грибами", description: "Вегетарианская, бюджетная и удивительно вкусная альтернатива традиционным тако.", image: "https://images.pexels.com/photos/5560443/pexels-photo-5560443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 стакан вареной чечевицы", "200г грибов", "1 луковица", "Кумин и паприка", "Кукурузные лепешки", "Кинза, лайм и авокадо для подачи"], steps: ["Обжарьте нарезанный лук и грибы.", "Добавьте чечевицу и специи. Готовьте 5 мин.", "Подогрейте лепешки.", "Наполните лепешки смесью и подавайте с любимыми топпингами."] },
+                        { title: "Быстрый томатный суп с базиликом", description: "Утешительный, классический и готовый в мгновение ока. Идеально для холодного дня.", image: "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 банка (400г) измельченных томатов", "1 луковица", "2 зубчика чеснока", "1/2 стакана овощного бульона", "Свежий базилик", "Немного сливок (по желанию)"], steps: ["Обжарьте лук и чеснок.", "Добавьте помидоры и бульон. Готовьте 10 мин.", "Измельчите суп до однородности.", "Подавайте горячим со свежим базиликом и сливками."] },
+                        { title: "Ролл с хумусом и овощами", description: "Холодный обед или ужин без готовки, который можно приготовить буквально за 5 минут.", image: "https://images.pexels.com/photos/6940989/pexels-photo-6940989.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 большие пшеничные лепешки", "1/2 стакана хумуса", "Листья шпината", "1/2 красного перца, нарезанного", "1/2 огурца, нарезанного", "Тертая морковь"], steps: ["Намажьте щедрый слой хумуса на каждую лепешку.", "Положите листья шпината в центр.", "Добавьте остальные овощи в ряд.", "Плотно сверните лепешку, и готово!"] }
                     ],
                     tips: [
                         { icon: "ph-leaf", title: "Mise en place - ваш друг", text: "Прежде чем начать, нарежьте все овощи и подготовьте ингредиенты. Это сэкономит вам невероятное количество стресса." },
