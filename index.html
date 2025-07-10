@@ -86,6 +86,19 @@
                     <!-- Consejos se generan con JS -->
                 </div>
             </section>
+
+            <!-- SECCIÓN NEWSLETTER -->
+            <section id="newsletter" class="mb-16 p-8 bg-gradient-to-r from-gray-700 to-gray-800 rounded-2xl shadow-lg text-white text-center">
+                <h2 class="text-3xl font-bold mb-4" data-translate="newsletter_title"></h2>
+                <p class="max-w-2xl mx-auto opacity-80 mb-6" data-translate="newsletter_text"></p>
+                <form id="newsletter-form" class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto">
+                    <input type="email" id="email-input" class="w-full sm:w-auto flex-grow px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400" required>
+                    <button type="submit" id="subscribe-button" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span data-translate="newsletter_button"></span>
+                    </button>
+                </form>
+                 <p id="newsletter-feedback" class="mt-4 h-6"></p>
+            </section>
         </main>
 
         <!-- Pie de Página -->
@@ -119,223 +132,262 @@
         </div>
     </div>
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+    <!-- SCRIPT DE LA APLICACIÓN -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // --- BASE DE DATOS DE TRADUCCIONES Y CONTENIDO ---
-        const content = {
-            es: {
-                header_title: "Cenas Rápidas y Saludables",
-                header_subtitle: "Recetas deliciosas en menos de 30 minutos, perfectas para tu estilo de vida.",
-                nav_home: "Inicio",
-                nav_recipes: "Recetas",
-                nav_tips: "Consejos",
-                nav_contact: "Contacto",
-                welcome_title: "¡Bienvenida/o a tu salvación en la cocina!",
-                welcome_text: "¿Cansada/o de llegar a casa sin ideas y terminar pidiendo delivery otra vez? ¡Se acabó! Aquí encontrarás un universo de recetas increíblemente fáciles, rápidas y, lo más importante, ¡deliciosas!",
-                welcome_button: "¡Quiero cocinar ya!",
-                recipes_title: "Nuestras Recetas Estrella",
-                tips_title: "Consejos para Ahorrar Tiempo y Comer Mejor",
-                footer_text: "© 2025 Cenas Rápidas y Saludables | Creado con ❤️ para ti.",
-                modal_ingredients: "Ingredientes",
-                modal_preparation: "Preparación",
-                recipe_button_text: "Ver Receta",
-                recipes: [
-                    { title: "Pasta Cremosa con Tomates Cherry", description: "Una cena deliciosa y rápida con ingredientes frescos y un toque italiano que te transportará.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200g de pasta", "1 taza de tomates cherry", "2 dientes de ajo", "1/2 taza de crema de leche", "Queso parmesano", "Albahaca fresca", "Aceite de oliva, sal, pimienta"], steps: ["Cocina la pasta.", "Saltea el ajo y los tomates.", "Añade la crema y cocina.", "Mezcla todo con la pasta y sirve."] },
-                    { title: "Ensalada de Quinoa y Aguacate", description: "Una opción nutritiva y llena de sabor, ideal para una cena ligera pero muy completa y saciante.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 taza de quinoa cocida", "1 aguacate en cubos", "1/2 taza de garbanzos", "1/4 cebolla morada", "Jugo de 1 limón", "Cilantro fresco", "Aceite de oliva, sal, pimienta"], steps: ["Mezcla la quinoa y garbanzos.", "Añade el aguacate y la cebolla.", "Prepara el aderezo de limón y aceite.", "Mezcla todo y sirve."] },
-                    { title: "Tostadas con Huevo y Salmón", description: "Una cena elegante y facilísima de preparar, rica en proteínas y grasas saludables Omega-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 rebanadas de pan integral", "2 huevos", "50g de salmón ahumado", "1/4 de aguacate", "Eneldo o cebollino", "Sal y pimienta"], steps: ["Tuesta el pan.", "Prepara los huevos revueltos.", "Unta el aguacate en las tostadas.", "Monta todo: tostada, aguacate, huevo y salmón."] }
-                ],
-                tips: [
-                    { icon: "ph-leaf", title: "Mise en place es tu amigo", text: "Antes de empezar, pica todas tus verduras y ten listos los ingredientes. Este truco de chef profesional te ahorrará un estrés increíble." },
-                    { icon: "ph-timer", title: "Cocina un poco de más", text: "Si haces arroz o quinoa, cocina el doble. Así ya tienes una base lista para tu almuerzo o cena del día siguiente. ¡Eficiencia pura!" },
-                    { icon: "ph-heart-straight", title: "Salsas que salvan vidas", text: "Prepara un par de salsas o aderezos sencillos durante el fin de semana. Un buen pesto o una vinagreta transforman cualquier plato aburrido." },
-                    { icon: "ph-sparkle", title: "No le temas a las especias", text: "Un poco de pimentón ahumado, comino o hierbas secas pueden llevar tu plato de 'meh' a '¡wow!' en segundos. ¡Experimenta sin miedo!" }
-                ]
-            },
-            en: {
-                header_title: "Quick & Healthy Dinners",
-                header_subtitle: "Delicious recipes in under 30 minutes, perfect for your lifestyle.",
-                nav_home: "Home",
-                nav_recipes: "Recipes",
-                nav_tips: "Tips",
-                nav_contact: "Contact",
-                welcome_title: "Welcome to your kitchen salvation!",
-                welcome_text: "Tired of coming home with no ideas and ordering delivery again? Not anymore! Here you'll find a universe of incredibly easy, fast, and most importantly, delicious recipes!",
-                welcome_button: "Let's cook now!",
-                recipes_title: "Our Star Recipes",
-                tips_title: "Tips to Save Time and Eat Better",
-                footer_text: "© 2025 Quick & Healthy Dinners | Made with ❤️ for you.",
-                modal_ingredients: "Ingredients",
-                modal_preparation: "Preparation",
-                recipe_button_text: "View Recipe",
-                recipes: [
-                    { title: "Creamy Cherry Tomato Pasta", description: "A delicious and quick dinner with fresh ingredients and an Italian touch that will transport you.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200g of pasta", "1 cup cherry tomatoes", "2 garlic cloves", "1/2 cup heavy cream", "Parmesan cheese", "Fresh basil", "Olive oil, salt, pepper"], steps: ["Cook the pasta.", "Sauté garlic and tomatoes.", "Add cream and cook.", "Mix everything with the pasta and serve."] },
-                    { title: "Quinoa and Avocado Salad", description: "A nutritious and flavorful option, ideal for a light but very complete and satisfying dinner.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 cup cooked quinoa", "1 avocado, diced", "1/2 cup chickpeas", "1/4 red onion", "Juice of 1 lemon", "Fresh cilantro", "Olive oil, salt, pepper"], steps: ["Mix quinoa and chickpeas.", "Add avocado and onion.", "Prepare lemon and oil dressing.", "Mix everything and serve."] },
-                    { title: "Toast with Egg and Salmon", description: "An elegant and very easy-to-prepare dinner, rich in protein and healthy Omega-3 fats.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 slices of whole wheat bread", "2 eggs", "50g smoked salmon", "1/4 avocado", "Dill or chives", "Salt and pepper"], steps: ["Toast the bread.", "Prepare scrambled eggs.", "Spread avocado on the toast.", "Assemble everything: toast, avocado, egg, and salmon."] }
-                ],
-                tips: [
-                    { icon: "ph-leaf", title: "Mise en place is your friend", text: "Before you start, chop all your vegetables and have your ingredients ready. This professional chef's trick will save you incredible stress." },
-                    { icon: "ph-timer", title: "Cook a little extra", text: "If you're making rice or quinoa, cook double. That way you have a base ready for your next day's lunch or dinner. Pure efficiency!" },
-                    { icon: "ph-heart-straight", title: "Life-saving sauces", text: "Prepare a couple of simple sauces or dressings over the weekend. A good pesto or vinaigrette can transform any boring dish." },
-                    { icon: "ph-sparkle", title: "Don't be afraid of spices", text: "A little smoked paprika, cumin, or dried herbs can take your dish from 'meh' to 'wow!' in seconds. Experiment without fear!" }
-                ]
-            },
-            ru: {
-                header_title: "Быстрые и здоровые ужины",
-                header_subtitle: "Вкусные рецепты менее чем за 30 минут, идеально подходящие для вашего образа жизни.",
-                nav_home: "Главная",
-                nav_recipes: "Рецепты",
-                nav_tips: "Советы",
-                nav_contact: "Контакт",
-                welcome_title: "Добро пожаловать в ваше кухонное спасение!",
-                welcome_text: "Устали приходить домой без идей и снова заказывать доставку? Больше нет! Здесь вы найдете вселенную невероятно простых, быстрых и, самое главное, вкусных рецептов!",
-                welcome_button: "Начнем готовить!",
-                recipes_title: "Наши звездные рецепты",
-                tips_title: "Советы, как сэкономить время и питаться лучше",
-                footer_text: "© 2025 Быстрые и здоровые ужины | Сделано с ❤️ для вас.",
-                modal_ingredients: "Ингредиенты",
-                modal_preparation: "Приготовление",
-                recipe_button_text: "Смотреть рецепт",
-                recipes: [
-                    { title: "Сливочная паста с томатами черри", description: "Вкусный и быстрый ужин со свежими ингредиентами и итальянской ноткой, который вас перенесет.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200г пасты", "1 стакан томатов черри", "2 зубчика чеснока", "1/2 стакана сливок", "Сыр пармезан", "Свежий базилик", "Оливковое масло, соль, перец"], steps: ["Сварите пасту.", "Обжарьте чеснок и помидоры.", "Добавьте сливки и готовьте.", "Смешайте все с пастой и подавайте."] },
-                    { title: "Салат с киноа и авокадо", description: "Питательный и ароматный вариант, идеально подходящий для легкого, но очень полноценного и сытного ужина.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 стакан вареной киноа", "1 авокадо, нарезанный кубиками", "1/2 стакана нута", "1/4 красного лука", "Сок 1 лимона", "Свежая кинза", "Оливковое масло, соль, перец"], steps: ["Смешайте киноа и нут.", "Добавьте авокадо и лук.", "Приготовьте заправку из лимона и масла.", "Все смешайте и подавайте."] },
-                    { title: "Тосты с яйцом и лососем", description: "Элегантный и очень простой в приготовлении ужин, богатый белком и полезными жирами Омега-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 ломтика цельнозернового хлеба", "2 яйца", "50г копченого лосося", "1/4 авокадо", "Укроп или зеленый лук", "Соль и перец"], steps: ["Поджарьте хлеб.", "Приготовьте яичницу-болтунью.", "Намажьте авокадо на тосты.", "Соберите все: тост, авокадо, яйцо и лосось."] }
-                ],
-                tips: [
-                    { icon: "ph-leaf", title: "Mise en place - ваш друг", text: "Прежде чем начать, нарежьте все овощи и подготовьте ингредиенты. Этот трюк профессионального шеф-повара сэкономит вам невероятное количество стресса." },
-                    { icon: "ph-timer", title: "Готовьте немного больше", text: "Если вы готовите рис или киноа, готовьте вдвое больше. Так у вас уже будет готова основа для обеда или ужина на следующий день. Чистая эффективность!" },
-                    { icon: "ph-heart-straight", title: "Соусы, спасающие жизнь", text: "Приготовьте пару простых соусов или заправок на выходных. Хороший песто или винегрет преобразят любое скучное блюдо." },
-                    { icon: "ph-sparkle", title: "Не бойтесь специй", text: "Немного копченой паприки, тмина или сушеных трав могут превратить ваше блюдо из 'так себе' в 'вау!' за секунды. Экспериментируйте без страха!" }
-                ]
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tus llaves de Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyCZNcceO31zkq8gqgLbwlb0ycFvHRY-yFc",
+                authDomain: "cenasrapidas-ed192.firebaseapp.com",
+                projectId: "cenasrapidas-ed192",
+                storageBucket: "cenasrapidas-ed192.firebasestorage.app",
+                messagingSenderId: "281525239097",
+                appId: "1:281525239097:web:3f74706d926a4271c7fce8"
+            };
+
+            // Inicialización de Firebase
+            let app, auth, db;
+            try {
+                app = firebase.initializeApp(firebaseConfig);
+                auth = firebase.auth();
+                db = firebase.firestore();
+                auth.signInAnonymously().catch((error) => {
+                    console.error("Error en el inicio de sesión anónimo:", error);
+                });
+            } catch (error) {
+                console.error("Error al inicializar Firebase:", error);
+                document.body.innerHTML = '<div style="text-align: center; padding: 50px; font-size: 1.2em;">Error de conexión. La configuración de Firebase es incorrecta.</div>';
+                return;
             }
-        };
 
-        let currentLang = localStorage.getItem('language') || 'es';
-
-        const langOptions = document.querySelectorAll('.lang-option');
-        const modal = document.getElementById('recipe-modal');
-        const closeModalButton = document.getElementById('close-modal');
-
-        function translatePage() {
-            document.documentElement.lang = currentLang;
-            document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.getAttribute('data-translate');
-                el.textContent = content[currentLang][key] || '';
-            });
-
-            // Generar contenido dinámico
-            generateRecipeCards();
-            generateTips();
-            
-            // Re-adjuntar listeners a los nuevos botones de receta
-            attachRecipeButtonListeners();
-
-            // Resaltar idioma activo
-            langOptions.forEach(opt => {
-                opt.classList.remove('bg-gray-200');
-                if (opt.dataset.lang === currentLang) {
-                    opt.classList.add('bg-gray-200');
+            const content = {
+                es: {
+                    header_title: "Cenas Rápidas y Saludables", header_subtitle: "Recetas deliciosas en menos de 30 minutos, perfectas para tu estilo de vida.",
+                    nav_home: "Inicio", nav_recipes: "Recetas", nav_tips: "Consejos", nav_contact: "Contacto",
+                    welcome_title: "¡Bienvenida/o a tu salvación en la cocina!", welcome_text: "Aquí encontrarás un universo de recetas increíblemente fáciles, rápidas y, lo más importante, ¡deliciosas!", welcome_button: "¡Quiero cocinar ya!",
+                    recipes_title: "Nuestras Recetas Estrella", tips_title: "Consejos para Ahorrar Tiempo y Comer Mejor",
+                    newsletter_title: "¡Únete a nuestra comunidad!", newsletter_text: "Recibe las nuevas recetas y los mejores consejos directamente en tu correo cada semana. ¡Sin spam!", newsletter_button: "Suscribirme", newsletter_placeholder: "Tu correo electrónico",
+                    feedback_success: "¡Gracias por suscribirte!", feedback_error: "Email inválido o error. Inténtalo de nuevo.",
+                    footer_text: "© 2025 Cenas Rápidas y Saludables | Creado con ❤️ para ti.",
+                    modal_ingredients: "Ingredientes", modal_preparation: "Preparación", recipe_button_text: "Ver Receta",
+                    recipes: [
+                        { title: "Pasta Cremosa con Tomates Cherry", description: "Una cena deliciosa y rápida con ingredientes frescos y un toque italiano.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200g de pasta", "1 taza de tomates cherry", "2 dientes de ajo", "1/2 taza de crema de leche", "Queso parmesano", "Albahaca fresca", "Aceite de oliva, sal, pimienta"], steps: ["Cocina la pasta.", "Saltea el ajo y los tomates.", "Añade la crema y cocina.", "Mezcla todo con la pasta y sirve."] },
+                        { title: "Ensalada de Quinoa y Aguacate", description: "Una opción nutritiva y llena de sabor, ideal para una cena ligera pero completa.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 taza de quinoa cocida", "1 aguacate en cubos", "1/2 taza de garbanzos", "1/4 cebolla morada", "Jugo de 1 limón", "Cilantro fresco", "Aceite de oliva, sal, pimienta"], steps: ["Mezcla la quinoa y garbanzos.", "Añade el aguacate y la cebolla.", "Prepara el aderezo de limón y aceite.", "Mezcla todo y sirve."] },
+                        { title: "Tostadas con Huevo y Salmón", description: "Una cena elegante y fácil, rica en proteínas y grasas saludables Omega-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 rebanadas de pan integral", "2 huevos", "50g de salmón ahumado", "1/4 de aguacate", "Eneldo o cebollino", "Sal y pimienta"], steps: ["Tuesta el pan.", "Prepara los huevos revueltos.", "Unta el aguacate en las tostadas.", "Monta todo: tostada, aguacate, huevo y salmón."] }
+                    ],
+                    tips: [
+                        { icon: "ph-leaf", title: "Mise en place es tu amigo", text: "Antes de empezar, pica todas tus verduras y ten listos los ingredientes. Te ahorrará un estrés increíble." },
+                        { icon: "ph-timer", title: "Cocina un poco de más", text: "Si haces arroz o quinoa, cocina el doble. Así ya tienes una base lista para tu almuerzo o cena del día siguiente." },
+                        { icon: "ph-heart-straight", title: "Salsas que salvan vidas", text: "Prepara un par de salsas o aderezos sencillos durante el fin de semana. Un buen pesto o vinagreta transforman cualquier plato." },
+                        { icon: "ph-sparkle", title: "No le temas a las especias", text: "Un poco de pimentón ahumado, comino o hierbas secas pueden llevar tu plato de 'meh' a '¡wow!' en segundos." }
+                    ]
+                },
+                en: {
+                    header_title: "Quick & Healthy Dinners", header_subtitle: "Delicious recipes in under 30 minutes, perfect for your lifestyle.",
+                    nav_home: "Home", nav_recipes: "Recipes", nav_tips: "Tips", nav_contact: "Contact",
+                    welcome_title: "Welcome to your kitchen salvation!", welcome_text: "Here you'll find a universe of incredibly easy, fast, and most importantly, delicious recipes!", welcome_button: "Let's cook now!",
+                    recipes_title: "Our Star Recipes", tips_title: "Tips to Save Time and Eat Better",
+                    newsletter_title: "Join our community!", newsletter_text: "Receive new recipes and the best tips directly in your email every week. No spam!", newsletter_button: "Subscribe", newsletter_placeholder: "Your email address",
+                    feedback_success: "Thanks for subscribing!", feedback_error: "Invalid email or error. Please try again.",
+                    footer_text: "© 2025 Quick & Healthy Dinners | Made with ❤️ for you.",
+                    modal_ingredients: "Ingredients", modal_preparation: "Preparation", recipe_button_text: "View Recipe",
+                    recipes: [
+                        { title: "Creamy Cherry Tomato Pasta", description: "A delicious and quick dinner with fresh ingredients and an Italian touch.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200g of pasta", "1 cup cherry tomatoes", "2 garlic cloves", "1/2 cup heavy cream", "Parmesan cheese", "Fresh basil", "Olive oil, salt, pepper"], steps: ["Cook the pasta.", "Sauté garlic and tomatoes.", "Add cream and cook.", "Mix everything with the pasta and serve."] },
+                        { title: "Quinoa and Avocado Salad", description: "A nutritious and flavorful option, ideal for a light but very complete dinner.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 cup cooked quinoa", "1 avocado, diced", "1/2 cup chickpeas", "1/4 red onion", "Juice of 1 lemon", "Fresh cilantro", "Olive oil, salt, pepper"], steps: ["Mix quinoa and chickpeas.", "Add avocado and onion.", "Prepare lemon and oil dressing.", "Mix everything and serve."] },
+                        { title: "Toast with Egg and Salmon", description: "An elegant and easy dinner, rich in protein and healthy Omega-3 fats.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 slices of whole wheat bread", "2 eggs", "50g smoked salmon", "1/4 avocado", "Dill or chives", "Salt and pepper"], steps: ["Toast the bread.", "Prepare scrambled eggs.", "Spread avocado on the toast.", "Assemble everything: toast, avocado, egg, and salmon."] }
+                    ],
+                    tips: [
+                        { icon: "ph-leaf", title: "Mise en place is your friend", text: "Before you start, chop all your vegetables and have your ingredients ready. It will save you incredible stress." },
+                        { icon: "ph-timer", title: "Cook a little extra", text: "If you're making rice or quinoa, cook double. That way you have a base ready for your next day's lunch or dinner." },
+                        { icon: "ph-heart-straight", title: "Life-saving sauces", text: "Prepare a couple of simple sauces or dressings over the weekend. A good pesto or vinaigrette can transform any boring dish." },
+                        { icon: "ph-sparkle", title: "Don't be afraid of spices", text: "A little smoked paprika, cumin, or dried herbs can take your dish from 'meh' to 'wow!' in seconds." }
+                    ]
+                },
+                ru: {
+                    header_title: "Быстрые и здоровые ужины", header_subtitle: "Вкусные рецепты менее чем за 30 минут, идеально для вашего образа жизни.",
+                    nav_home: "Главная", nav_recipes: "Рецепты", nav_tips: "Советы", nav_contact: "Контакт",
+                    welcome_title: "Добро пожаловать в ваше кухонное спасение!", welcome_text: "Здесь вы найдете вселенную невероятно простых, быстрых и, самое главное, вкусных рецептов!", welcome_button: "Начнем готовить!",
+                    recipes_title: "Наши звездные рецепты", tips_title: "Советы, как сэкономить время и питаться лучше",
+                    newsletter_title: "Присоединяйтесь к нашему сообществу!", newsletter_text: "Получайте новые рецепты и лучшие советы прямо на вашу почту каждую неделю. Без спама!", newsletter_button: "Подписаться", newsletter_placeholder: "Ваш e-mail",
+                    feedback_success: "Спасибо за подписку!", feedback_error: "Неверный email или ошибка. Попробуйте снова.",
+                    footer_text: "© 2025 Быстрые и здоровые ужины | Сделано с ❤️ для вас.",
+                    modal_ingredients: "Ингредиенты", modal_preparation: "Приготовление", recipe_button_text: "Смотреть рецепт",
+                    recipes: [
+                        { title: "Сливочная паста с томатами черри", description: "Вкусный и быстрый ужин со свежими ингредиентами и итальянской ноткой.", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["200г пасты", "1 стакан томатов черри", "2 зубчика чеснока", "1/2 стакана сливок", "Сыр пармезан", "Свежий базилик", "Оливковое масло, соль, перец"], steps: ["Сварите пасту.", "Обжарьте чеснок и помидоры.", "Добавьте сливки и готовьте.", "Смешайте все с пастой и подавайте."] },
+                        { title: "Салат с киноа и авокадо", description: "Питательный и ароматный вариант, идеально для легкого, но очень сытного ужина.", image: "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["1 стакан вареной киноа", "1 авокадо, кубиками", "1/2 стакана нута", "1/4 красного лука", "Сок 1 лимона", "Свежая кинза", "Оливковое масло, соль, перец"], steps: ["Смешайте киноа и нут.", "Добавьте авокадо и лук.", "Приготовьте заправку из лимона и масла.", "Все смешайте и подавайте."] },
+                        { title: "Тосты с яйцом и лососем", description: "Элегантный и простой ужин, богатый белком и полезными жирами Омега-3.", image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ingredients: ["2 ломтика хлеба", "2 яйца", "50г копченого лосося", "1/4 авокадо", "Укроп или зеленый лук", "Соль и перец"], steps: ["Поджарьте хлеб.", "Приготовьте яичницу.", "Намажьте авокадо на тосты.", "Соберите все: тост, авокадо, яйцо и лосось."] }
+                    ],
+                    tips: [
+                        { icon: "ph-leaf", title: "Mise en place - ваш друг", text: "Прежде чем начать, нарежьте все овощи и подготовьте ингредиенты. Это сэкономит вам невероятное количество стресса." },
+                        { icon: "ph-timer", title: "Готовьте немного больше", text: "Если вы готовите рис или киноа, готовьте вдвое больше. Так у вас уже будет готова основа на следующий день." },
+                        { icon: "ph-heart-straight", title: "Соусы, спасающие жизнь", text: "Приготовьте пару простых соусов на выходных. Хороший песто или винегрет преобразят любое скучное блюдо." },
+                        { icon: "ph-sparkle", title: "Не бойтесь специй", text: "Немного копченой паприки, тмина или сушеных трав могут превратить ваше блюдо из 'так себе' в 'вау!'." }
+                    ]
                 }
-            });
-        }
+            };
 
-        function generateRecipeCards() {
-            const container = document.querySelector('#recetas .grid');
-            container.innerHTML = '';
-            content[currentLang].recipes.forEach(recipe => {
-                const card = `
-                    <article class="recipe-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
-                        <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-56 object-cover">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="text-2xl recipe-card-title text-gray-800 mb-2">${recipe.title}</h3>
-                            <p class="text-gray-600 flex-grow mb-4">${recipe.description}</p>
-                            <button class="recipe-button mt-auto self-start bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-lg transition-colors duration-300">${content[currentLang].recipe_button_text}</button>
-                        </div>
-                    </article>`;
-                container.innerHTML += card;
-            });
-        }
+            let currentLang = localStorage.getItem('language') || 'es';
 
-        function generateTips() {
-            const container = document.querySelector('#consejos .grid');
-            container.innerHTML = '';
-            content[currentLang].tips.forEach(tip => {
-                const tipHTML = `
-                    <div class="flex items-start space-x-4">
-                        <i class="ph-light ${tip.icon} text-4xl text-emerald-500 bg-emerald-100 p-2 rounded-full"></i>
-                        <div>
-                            <h4 class="font-bold text-lg">${tip.title}</h4>
-                            <p class="text-gray-600">${tip.text}</p>
-                        </div>
-                    </div>`;
-                container.innerHTML += tipHTML;
-            });
-        }
-        
-        function attachRecipeButtonListeners() {
-            const recipeButtons = document.querySelectorAll('.recipe-button');
-            recipeButtons.forEach((button, index) => {
-                button.addEventListener('click', () => {
-                    const recipe = content[currentLang].recipes[index];
-                    
-                    document.getElementById('modal-title').textContent = recipe.title;
-                    document.getElementById('modal-image').src = recipe.image;
-                    
-                    const ingredientsList = document.getElementById('modal-ingredients');
-                    ingredientsList.innerHTML = '';
-                    recipe.ingredients.forEach(ing => {
-                        const li = document.createElement('li');
-                        li.textContent = ing;
-                        ingredientsList.appendChild(li);
+            const langOptions = document.querySelectorAll('.lang-option');
+            const modal = document.getElementById('recipe-modal');
+            const closeModalButton = document.getElementById('close-modal');
+            const newsletterForm = document.getElementById('newsletter-form');
+            const emailInput = document.getElementById('email-input');
+            const subscribeButton = document.getElementById('subscribe-button');
+            const newsletterFeedback = document.getElementById('newsletter-feedback');
+
+            function translatePage() {
+                document.documentElement.lang = currentLang;
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.getAttribute('data-translate');
+                    el.textContent = content[currentLang][key] || '';
+                });
+                emailInput.placeholder = content[currentLang].newsletter_placeholder;
+
+                generateRecipeCards();
+                generateTips();
+                attachRecipeButtonListeners();
+
+                langOptions.forEach(opt => {
+                    opt.classList.toggle('bg-gray-200', opt.dataset.lang === currentLang);
+                });
+            }
+
+            function generateRecipeCards() {
+                const container = document.querySelector('#recetas .grid');
+                container.innerHTML = '';
+                content[currentLang].recipes.forEach(recipe => {
+                    container.innerHTML += `
+                        <article class="recipe-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                            <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-56 object-cover">
+                            <div class="p-6 flex-grow flex flex-col">
+                                <h3 class="text-2xl recipe-card-title text-gray-800 mb-2">${recipe.title}</h3>
+                                <p class="text-gray-600 flex-grow mb-4">${recipe.description}</p>
+                                <button class="recipe-button mt-auto self-start bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-lg transition-colors duration-300">${content[currentLang].recipe_button_text}</button>
+                            </div>
+                        </article>`;
+                });
+            }
+
+            function generateTips() {
+                const container = document.querySelector('#consejos .grid');
+                container.innerHTML = '';
+                content[currentLang].tips.forEach(tip => {
+                    container.innerHTML += `
+                        <div class="flex items-start space-x-4">
+                            <i class="ph-light ${tip.icon} text-4xl text-emerald-500 bg-emerald-100 p-2 rounded-full"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">${tip.title}</h4>
+                                <p class="text-gray-600">${tip.text}</p>
+                            </div>
+                        </div>`;
+                });
+            }
+            
+            function attachRecipeButtonListeners() {
+                document.querySelectorAll('.recipe-button').forEach((button, index) => {
+                    button.addEventListener('click', () => {
+                        const recipe = content[currentLang].recipes[index];
+                        document.getElementById('modal-title').textContent = recipe.title;
+                        document.getElementById('modal-image').src = recipe.image;
+                        
+                        const ingredientsList = document.getElementById('modal-ingredients');
+                        ingredientsList.innerHTML = '';
+                        recipe.ingredients.forEach(ing => ingredientsList.innerHTML += `<li>${ing}</li>`);
+
+                        const stepsList = document.getElementById('modal-steps');
+                        stepsList.innerHTML = '';
+                        recipe.steps.forEach(step => stepsList.innerHTML += `<li>${step}</li>`);
+
+                        modal.classList.remove('hidden');
                     });
+                });
+            }
+            
+            // --- LÓGICA NEWSLETTER ---
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = emailInput.value.trim();
+                const originalButtonText = subscribeButton.querySelector('span').textContent;
 
-                    const stepsList = document.getElementById('modal-steps');
-                    stepsList.innerHTML = '';
-                    recipe.steps.forEach(step => {
-                        const li = document.createElement('li');
-                        li.textContent = step;
-                        stepsList.appendChild(li);
-                    });
+                if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+                    newsletterFeedback.textContent = content[currentLang].feedback_error;
+                    newsletterFeedback.classList.add('text-red-400');
+                    setTimeout(() => {
+                        newsletterFeedback.textContent = '';
+                        newsletterFeedback.classList.remove('text-red-400');
+                    }, 3000);
+                    return;
+                }
 
-                    modal.classList.remove('hidden');
+                subscribeButton.disabled = true;
+                subscribeButton.innerHTML = `<i class="ph ph-circle-notch animate-spin text-2xl"></i>`;
+
+                db.collection(`/artifacts/${firebaseConfig.projectId}/public/data/subscribers`).add({
+                    email: email,
+                    subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    language: currentLang
+                })
+                .then(() => {
+                    subscribeButton.innerHTML = `<i class="ph ph-check text-2xl"></i>`;
+                    newsletterFeedback.textContent = content[currentLang].feedback_success;
+                    newsletterFeedback.classList.add('text-green-400');
+                    emailInput.value = '';
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                    subscribeButton.innerHTML = `<i class="ph ph-x text-2xl"></i>`;
+                    newsletterFeedback.textContent = content[currentLang].feedback_error;
+                    newsletterFeedback.classList.add('text-red-400');
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        subscribeButton.disabled = false;
+                        subscribeButton.innerHTML = `<span>${originalButtonText}</span>`;
+                        newsletterFeedback.textContent = '';
+                        newsletterFeedback.classList.remove('text-green-400', 'text-red-400');
+                    }, 3000);
                 });
             });
-        }
 
-        langOptions.forEach(option => {
-            option.addEventListener('click', () => {
+
+            // --- INICIALIZACIÓN ---
+            langOptions.forEach(option => option.addEventListener('click', () => {
                 currentLang = option.dataset.lang;
                 localStorage.setItem('language', currentLang);
                 translatePage();
+            }));
+            
+            closeModalButton.addEventListener('click', () => modal.classList.add('hidden'));
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.add('hidden');
             });
-        });
-        
-        closeModalButton.addEventListener('click', () => modal.classList.add('hidden'));
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.add('hidden');
-        });
 
-        // --- LÓGICA DE NAVEGACIÓN ACTIVA ---
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('main section');
-        function updateActiveLink() {
-            let currentSectionId = '';
-            sections.forEach(section => {
-                if (pageYOffset >= section.offsetTop - 100) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-            navLinks.forEach(link => {
-                link.classList.remove('bg-emerald-100', 'text-emerald-700');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('bg-emerald-100', 'text-emerald-700');
-                }
-            });
-        }
-        window.addEventListener('scroll', updateActiveLink);
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            function updateActiveLink() {
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    if (pageYOffset >= section.offsetTop - 100) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('bg-emerald-100', 'text-emerald-700');
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                        link.classList.add('bg-emerald-100', 'text-emerald-700');
+                    }
+                });
+            }
+            window.addEventListener('scroll', updateActiveLink);
 
-        // Traducción inicial
-        translatePage();
-    });
+            translatePage();
+        });
     </script>
 </body>
 </html>
